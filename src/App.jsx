@@ -1,6 +1,5 @@
 import "./App.css";
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Employees from "./pages/Employees";
 import StartingPage from "./pages/StartingPage";
@@ -15,7 +14,7 @@ function App() {
         </div>
         <div className="flex-1">
           <Routes>
-            <Route path="/employees" element={<Employees />} />
+            <Route path="/employees" element={<Employees />}/>
             <Route path="/" element={<StartingPage />} />
           </Routes>
         </div>
