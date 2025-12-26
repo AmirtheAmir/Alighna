@@ -1,54 +1,61 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@tailwind utilities;
 
 @theme {
   /* background colors */
-  --color-background-base: oklch(0.18 0 0);
-  --color-background-surface: oklch(0.2 0 0);
-  --color-background-surface-hover: oklch(0.24 0 0);
-  --color-background-elevated: oklch(0.26 0 0);
-  --color-background-elevated-hover: oklch(0.3 0 0);
-  --color-background-overlay: oklch(0.34 0 0);
+  --color-bg-base: oklch(0.1149 0 0);
+  --color-bg-surface-primary: oklch(0.1684 0 0);
+  --color-bg-surface-hover: oklch(0.1913 0 0);
+  --color-bg-elevated-primary: oklch(0.2178 0 0);
+  --color-bg-elevated-hover: oklch(0.2393 0 0);
+  --color-bg-elevated-secondary: oklch(0.2603 0 0);
+
   /* text colors */
-  --color-tx-primary: oklch(0.94 0 0);
-  --color-tx-secondary: oklch(0.748 0 0);
-  --color-tx-muted: oklch(0.545 0 0);
-  --color-tx-disabled: oklch(0.36 0 0);
+  --color-primary: oklch(0.9067 0 0);
+  --color-secondary: oklch(0.7476 0 0);
+  --color-muted: oklch(0.5795 0 0);
+  --color-disabled: oklch(0.36 0 0);
+  --color-unchanged: oklch(0.1684 0 0);
+
   /* border colors */
-  --color-br-base: oklch(0.281 0 0);
-  --color-br-muted: oklch(0.36 0 0);
-  --color-br-elevated: oklch(0.398 0 0);
-  --color-br-filled: oklch(0.42 0 0);
-  --color-br-clicked: oklch(0.562 0 0);
+  --color-border-primary: oklch(0.2603 0 0);
+  --color-border-secondary: oklch(0.36 0 0);
+  --color-border-tertiary: oklch(0.4386 0 0);
+  --color-border-active: oklch(0.5103 0 0);
+
   /* brand colors */
-  --color-primary: oklch(0.64 0.26 29);
-  /* font style */
+  --color-brand-primary: oklch(0.6341 0.251763 29.7254);
+  --color-brand-secondary: oklch(0.5868 0.2326 29.7);
+
+  /* font styles */
   --font-sans: "Inter", sans-serif;
 }
 
 body {
-  background-color: var(--color-background-base);
+  background-color: var(--color-bg-base);
   margin: 0;
 }
 
-.rounded-xl2 {
+
+.rounded-14 {
   border-radius: 14px;
 }
 
 /* 2XL — 24px */
-.txt-2xl-400 {
+.size-2xl-400 {
   font-size: 24px;
   font-weight: 400;
   line-height: 32px;
   letter-spacing: -0.01em;
 }
-.txt-2xl-500 {
+.size-2xl-500 {
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
   letter-spacing: -0.01em;
 }
-.txt-2xl-600 {
+.size-2xl-600 {
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
@@ -56,19 +63,19 @@ body {
 }
 
 /*XL — 20px */
-.txt-xl-400 {
+.size-xl-400 {
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 0em;
 }
-.txt-xl-500 {
+.size-xl-500 {
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
   letter-spacing: 0em;
 }
-.txt-xl-600 {
+.size-xl-600 {
   font-size: 20px;
   font-weight: 600;
   line-height: 28px;
@@ -76,19 +83,19 @@ body {
 }
 
 /*L — 18px */
-.txt-l-400 {
+.size-l-400 {
   font-size: 18px;
   font-weight: 400;
   line-height: 26px;
   letter-spacing: 0em;
 }
-.txt-l-500 {
+.size-l-500 {
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
   letter-spacing: 0em;
 }
-.txt-l-600 {
+.size-l-600 {
   font-size: 18px;
   font-weight: 600;
   line-height: 26px;
@@ -96,19 +103,19 @@ body {
 }
 
 /*M — 16px */
-.txt-m-400 {
+.size-m-400 {
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0em;
 }
-.txt-m-500 {
+.size-m-500 {
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0em;
 }
-.txt-m-600 {
+.size-m-600 {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -116,19 +123,19 @@ body {
 }
 
 /*S — 14px */
-.txt-s-400 {
+.size-s-400 {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.0025em;
 }
-.txt-s-500 {
+.size-s-500 {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.0025em;
 }
-.txt-s-600 {
+.size-s-600 {
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
@@ -136,19 +143,19 @@ body {
 }
 
 /*XS — 12px */
-.txt-xs-400 {
+.size-xs-400 {
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.01em;
 }
-.txt-xs-500 {
+.size-xs-500 {
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.01em;
 }
-.txt-xs-600 {
+.size-xs-600 {
   font-size: 12px;
   font-weight: 600;
   line-height: 16px;
@@ -156,30 +163,30 @@ body {
 }
 
 /*2XS — 10px */
-.txt-2xs-400 {
+.size-2xs-400 {
   font-size: 10px;
   font-weight: 400;
   line-height: 14px;
   letter-spacing: 0.015em;
 }
-.txt-2xs-500 {
+.size-2xs-500 {
   font-size: 10px;
   font-weight: 500;
   line-height: 14px;
   letter-spacing: 0.015em;
 }
-.txt-2xs-600 {
+.size-2xs-600 {
   font-size: 10px;
   font-weight: 600;
   line-height: 14px;
   letter-spacing: 0.015em;
 }
 
-.logo-text{
+.logo-text {
   font-size: 22px;
   font-weight: 600;
   font-style: italic;
   line-height: 30px;
   letter-spacing: -0.05em;
 }
-@tailwind utilities;
+

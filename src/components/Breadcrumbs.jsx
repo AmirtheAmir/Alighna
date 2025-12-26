@@ -17,20 +17,20 @@ export default function Breadcrumbs() {
   });
 
   return (
-    <div className="flex items-center gap-2 text-tx-disabled">
+    <div className="flex items-center gap-2 text-disabled">
       {crumbs.map((crumb, index) => {
         const isLast = index === crumbs.length - 1;
         return (
           <>
             <RightIcon />
             {isLast ? (
-              <span className="txt-s-600 text-tx-muted hover:text-tx-secondary transition-colors duration-150">
+              <span className="size-s-600 text-muted hover:text-secondary transition-colors duration-150">
                 {capitalize(crumb.label)}
               </span>
             ) : (
               <NavLink
                 to={crumb.to}
-                className="txt-s-600 text-tx-disabled hover:text-tx-muted transition-colors  duration-150"
+                className="size-s-600 text-disabled hover:text-muted transition-colors duration-150"
               >
                 {capitalize(crumb.label)}
               </NavLink>
