@@ -156,8 +156,8 @@ function Sidebar() {
                   </NavLink>
                 ))
               ) : (
-                <div className="px-3 py-2 size-s-500 text-brand-primary">
-                  No results
+                <div className="py-2 w-full items-center justify-center size-s-500  text-muted flex">
+                  <h1 className="size-xs-600">No Results</h1>
                 </div>
               )}
             </div>
@@ -183,7 +183,7 @@ function Sidebar() {
                   </NavLink>
                 ))}
               </div>
-              <div className="h-0.5 w-full bg-bg-base" />
+              <div className="h-0.5 w-full bg-border-primary" />
               <div className="flex flex-col gap-2">
                 {navBottom.map(({ label, to, Icon }) => (
                   <NavLink

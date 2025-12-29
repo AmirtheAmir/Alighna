@@ -28,6 +28,15 @@
   --color-brand-primary: oklch(0.6341 0.251763 29.7254);
   --color-brand-secondary: oklch(0.5868 0.2326 29.7);
 
+  /* pill colors */
+  --color-aqua-primary:oklch(0.874 0.1455 202.51);
+  --color-aqua-background:oklch(0.2502 0.0401 205.83);
+  --color-yellow-primary:oklch(0.9376 0.1942 104.83);
+  --color-yellow-background:oklch(0.269 0.0529 103.04);
+  --color-violet-primary:oklch(0.5517 0.2841 296.42);
+  --color-violet-background:oklch(0.1649 0.0886 298.76);
+  --color-crimson-primary:oklch(0.6332 0.2526 22.27);
+  --color-crimson-background:oklch(0.1906 0.0672 13.09);
   /* font styles */
   --font-sans: "Inter", sans-serif;
 }
@@ -37,9 +46,11 @@ body {
   margin: 0;
 }
 
-
 .rounded-14 {
   border-radius: 14px;
+}
+.rounded-20 {
+  border-radius: 20px;
 }
 
 /* 2XL — 24px */
@@ -190,3 +201,20 @@ body {
   letter-spacing: -0.05em;
 }
 
+
+.custom-scroll::-webkit-scrollbar-button {
+  display: none;
+}
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: oklch(0.5795 0 0); /* change color */
+  border-radius: 999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(0.9067 0 0);
+}
