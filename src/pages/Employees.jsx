@@ -6,15 +6,15 @@ import MaxIcon from "../assets/icons/max.svg?react";
 import FilterUpIcon from "../assets/icons/sortUp.svg?react";
 import FilterDownIcon from "../assets/icons/sortDown.svg?react";
 import EmployeeCard from "../components/EmployeeCard.jsx";
-import andreas from "../assets/images/andreas.jpg";
-import anton from "../assets/images/anton.jpg";
-import anna from "../assets/images/anna.jpg";
-import alva from "../assets/images/alva.jpeg";
-import adam from "../assets/images/adam.jpg";
-import amanda from "../assets/images/amanda.jpg";
-import eric from "../assets/images/eric.jpg";
-import sofia from "../assets/images/sofia.jpg";
-import lucas from "../assets/images/lucas.jpg";
+// import andreas from "../assets/images/andreas.jpg";
+// import anton from "../assets/images/anton.jpg";
+// import anna from "../assets/images/anna.jpg";
+// import alva from "../assets/images/alva.jpeg";
+// import adam from "../assets/images/adam.jpg";
+// import amanda from "../assets/images/amanda.jpg";
+// import eric from "../assets/images/eric.jpg";
+// import sofia from "../assets/images/sofia.jpg";
+// import lucas from "../assets/images/lucas.jpg";
 
 function Employees() {
   const employees = [
@@ -23,7 +23,7 @@ function Employees() {
       firstName: "Andreas",
       lastName: "Lindström",
       title: "Senior System Designer",
-      avatar: andreas,
+      avatar: "AL",
       status: "suspended",
       department: "Engineering",
       type: "Contractor",
@@ -36,7 +36,7 @@ function Employees() {
       firstName: "Anton",
       lastName: "Sjöberg",
       title: "Frontend Engineer",
-      avatar: anton,
+      avatar: "AS",
       status: "probation",
       department: "Engineering",
       type: "Full-time",
@@ -49,7 +49,7 @@ function Employees() {
       firstName: "Anna",
       lastName: "Bergström",
       title: "HR Assistant",
-      avatar: anna,
+      avatar: "AB",
       status: "terminated",
       department: "Human Resources",
       type: "Full-time",
@@ -62,7 +62,7 @@ function Employees() {
       firstName: "Alva",
       lastName: "Nyström",
       title: "Brand Designer",
-      avatar: alva,
+      avatar: "AN",
       status: "active",
       department: "Marketing",
       type: "Full-time",
@@ -75,7 +75,7 @@ function Employees() {
       firstName: "Adam",
       lastName: "Hansen",
       title: "Data Analyst",
-      avatar: adam,
+      avatar: "AH",
       status: "vacation",
       department: "Analytics",
       type: "Part-time",
@@ -88,7 +88,7 @@ function Employees() {
       firstName: "Amanda",
       lastName: "Löfgren",
       title: "Product Designer",
-      avatar: amanda,
+      avatar: "AL",
       status: "active",
       department: "Design",
       type: "Full-time",
@@ -101,7 +101,7 @@ function Employees() {
       firstName: "Erik",
       lastName: "Johansson",
       title: "Backend Engineer",
-      avatar: eric,
+      avatar: "EJ",
       status: "active",
       department: "Engineering",
       type: "Full-time",
@@ -114,7 +114,7 @@ function Employees() {
       firstName: "Sofia",
       lastName: "Karlsson",
       title: "UX Writer",
-      avatar: sofia,
+      avatar: "SK",
       status: "notice",
       department: "Design",
       type: "Contractor",
@@ -127,7 +127,7 @@ function Employees() {
       firstName: "Lucas",
       lastName: "Meyer",
       title: "Growth Manager",
-      avatar: lucas,
+      avatar: "LM",
       status: "active",
       department: "Marketing",
       type: "Full-time",
@@ -219,7 +219,7 @@ function Employees() {
         </div>
       </div>
       {/* employee cards */}
-      <div className="flex-1 overflow-y-auto custom-scroll">
+      <div className="flex-1 overflow-y-auto custom-scroll pr-2">
         <div className=" grid gap-4 items-start grid-cols-4 ">
           {employees.map((emp) => (
             <EmployeeCard

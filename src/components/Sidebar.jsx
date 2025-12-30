@@ -37,7 +37,7 @@ function Sidebar() {
     { label: "Help", to: "/help", Icon: HelpIcon },
   ];
 
-  const navLogo = { label: "Alighna", to: "/", Icon: LogoIcon };
+  const navLogo = { label: "lighna", to: "/", Icon: LogoIcon };
 
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
@@ -77,6 +77,7 @@ function Sidebar() {
           <div className="flex flex-row py-1 pl-1 pr-3 rounded-2xl bg-bg-surface-primary hover:bg-bg-surface-hover transition-all duration-200 ease-in">
             {/* profile account */}
             <div className="flex flex-row gap-2  ">
+              
               <img
                 src={AmeliaImg}
                 alt="Amelia Nowak"
@@ -230,18 +231,20 @@ function Sidebar() {
           ))}
         </div>
         {/* logo container */}
-        <div className="flex flex-row px-2 pb-2 justify-between items-center ">
-          <NavLink
-            to={navLogo.to}
-            // end={to === "/"}
-            className="
-              flex items-center gap-2"
-          >
-            <navLogo.Icon className="text-current" />
-            <span className="text-brand-primary logo-text">
-              {navLogo.label}
-            </span>
-          </NavLink>
+        <div className="flex flex-row px-2 pb-2 justify-between items-center">
+          <div className="">
+            <NavLink
+              to={navLogo.to}
+              // end={to === "/"}
+              className="
+              flex items-center"
+            >
+              <navLogo.Icon className="text-current" />
+              <span className="text-brand-primary mt-1 logo-text ">
+                {navLogo.label}
+              </span>
+            </NavLink>
+          </div>
           <SidebarIcon className="text-disabled cursor-pointer" />
         </div>
       </div>

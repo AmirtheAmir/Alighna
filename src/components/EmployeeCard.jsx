@@ -5,38 +5,38 @@ import DownIcon from "../assets/icons/down.svg?react";
 const STATUS_STYLES = {
   active: {
     label: "Active",
-    dot: "bg-aqua-primary",
-    pill: "bg-aqua-background text-aqua-primary size-s-600",
+    dot: "bg-green-primary",
+    pill: "bg-green-background text-green-primary size-s-600",
   },
   probation: {
     label: "Probation",
-    dot: "bg-aqua-primary",
-    pill: "bg-aqua-background text-aqua-primary size-s-600",
+    dot: "bg-green-primary",
+    pill: "bg-green-background text-green-primary size-s-600",
   },
   vacation: {
     label: "Vacation",
-    dot: "bg-yellow-primary",
-    pill: "bg-yellow-background text-yellow-primary size-s-600",
+    dot: "bg-cyan-primary",
+    pill: "bg-cyan-background text-cyan-primary size-s-600",
   },
   sick: {
     label: "Sick leave",
-    dot: "bg-violet-primary",
-    pill: "bg-violet-background text-violet-primary size-s-600",
+    dot: "bg-yellow-primary",
+    pill: "bg-yellow-background text-yellow-primary size-s-600",
   },
   suspended: {
     label: "Suspended",
-    dot: "bg-violet-primary",
-    pill: "bg-violet-background text-violet-primary size-s-600",
+    dot: "bg-yellow-primary",
+    pill: "bg-yellow-background text-yellow-primary size-s-600",
   },
   notice: {
     label: "Notice Period",
-    dot: "bg-violet-primary",
-    pill: "bg-violet-background text-violet-primary size-s-600",
+    dot: "bg-yellow-primary",
+    pill: "bg-yellow-background text-yellow-primary size-s-600",
   },
   terminated: {
     label: "Terminated",
-    dot: "bg-crimson-primary",
-    pill: "bg-crimson-background text-crimson-primary size-s-600",
+    dot: "bg-red-primary",
+    pill: "bg-red-background text-red-primary size-s-600",
   },
 };
 
@@ -116,19 +116,22 @@ export default function EmployeeCard({
   return (
     <div
       onClick={onClick}
-      className="w-full rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary
-        px-2 pt-2 pb-4 "
+      className="w-full rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2
+        px-2 pt-2 pb-4"
     >
-      <div className="flex items-start justify-between flex-col gap-4">
+      <div className="flex items-start justify-between flex-col gap-4 ">
         {/* image and name and title */}
-        <div className="flex items-center flex-row justify-between bg-bg-elevated-secondary pr-2 py-1 pl-1 w-full rounded-xl">
+        <div className="flex items-center flex-row justify-between pr-2 py-1 pl-1 w-full rounded-xl">
           <div className="flex flex-row gap-2 items-center">
-            <div className="h-11 w-11 ">
+            <div className="h-13 w-13 ">
               {avatar ? (
-                <img
-                  src={avatar}
-                  className="h-full w-full rounded-lg object-cover brightness-80"
-                />
+                <span className="h-full w-full rounded-xl flex justify-center items-center border-2 border-border-primary text-primary size-s-600">
+                  {avatar}
+                </span>
+                // <img
+                //   src={avatar}
+                //   className="h-full w-full rounded-lg object-cover brightness-50"
+                // />
               ) : null}
             </div>
             <div className="flex flex-col">
@@ -139,6 +142,7 @@ export default function EmployeeCard({
           <MoreIcon className=" text-primary" />
         </div>
       </div>
+      <div className="h-0.5 w-full bg-border-secondary" />
       <div className="flex flex-col gap-4">
         {/* top rows */}
         <div className="flex flex-col gap-4">
@@ -165,7 +169,6 @@ export default function EmployeeCard({
         </div>
         {/* expand or retract icon */}
         <div className=" flex items-center gap-2 justify-center flex-col">
-          <div className="h-0.5 w-full bg-border-primary" />
           <button
             type="button"
             onClick={toggle}
