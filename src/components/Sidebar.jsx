@@ -77,7 +77,7 @@ function Sidebar() {
           <div className="flex flex-row py-1 pl-1 pr-3 rounded-2xl bg-bg-surface-primary hover:bg-bg-surface-hover transition-all duration-200 ease-in">
             {/* profile account */}
             <div className="flex flex-row gap-2  ">
-              
+
               <img
                 src={AmeliaImg}
                 alt="Amelia Nowak"
@@ -174,7 +174,7 @@ function Sidebar() {
                       `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
               ${
                 isActive
-                  ? "bg-bg-elevated-primary ring-2 ring-border-active text-primary"
+                  ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"
                   : "text-disabled hover:bg-bg-surface-hover hover:text-primary"
               }`
                     }
@@ -194,7 +194,7 @@ function Sidebar() {
                       `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
               ${
                 isActive
-                  ? "bg-bg-elevated-primary ring-2 ring-border-active text-primary"
+                  ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"
                   : "text-disabled hover:bg-bg-surface-hover hover:text-primary"
               }`
                     }
@@ -220,7 +220,7 @@ function Sidebar() {
                 `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
          ${
            isActive
-             ? "bg-bg-elevated-primary ring-2 ring-border-active text-primary"
+             ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"
              : "text-disabled hover:bg-bg-surface-hover hover:text-primary"
          }`
               }

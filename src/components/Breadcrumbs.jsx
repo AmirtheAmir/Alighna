@@ -4,9 +4,7 @@ export default function Breadcrumbs() {
   const location = useLocation();
 
   const segments = location.pathname.split("/").filter(Boolean);
-  // "/employees/suspended" → ["employees", "suspended"]
 
-  // Convert URL segments into breadcrumb objects
   const crumbs = segments.map((segment, index) => {
     const to = "/" + segments.slice(0, index + 1).join("/");
 

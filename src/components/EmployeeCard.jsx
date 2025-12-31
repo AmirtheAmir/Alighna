@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import MoreIcon from "../assets/icons/more.svg?react";
 import DownIcon from "../assets/icons/down.svg?react";
 
@@ -95,8 +95,13 @@ export default function EmployeeCard({
   dates,
   defaultExpanded = true,
   onClick,
+  compact = false,
 }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
+  
+  useEffect(() => {
+    setExpanded(!compact);
+  }, [compact]);
 
   const statusKey = status?.toLowerCase();
   const statusStyle = STATUS_STYLES[statusKey] ?? STATUS_STYLES.active;
@@ -123,16 +128,16 @@ export default function EmployeeCard({
         {/* image and name and title */}
         <div className="flex items-center flex-row justify-between pr-2 py-1 pl-1 w-full rounded-xl">
           <div className="flex flex-row gap-2 items-center">
-            <div className="h-13 w-13 ">
+            <div className="h-12 w-12 ">
               {avatar ? (
                 <span className="h-full w-full rounded-xl flex justify-center items-center border-2 border-border-primary text-primary size-s-600">
                   {avatar}
                 </span>
-                // <img
-                //   src={avatar}
-                //   className="h-full w-full rounded-lg object-cover brightness-50"
-                // />
-              ) : null}
+              ) : // <img
+              //   src={avatar}
+              //   className="h-full w-full rounded-lg object-cover brightness-50"
+              // />
+              null}
             </div>
             <div className="flex flex-col">
               <div className=" size-l-600 text-primary">{fullName}</div>
@@ -184,7 +189,7 @@ export default function EmployeeCard({
           </button>
         </div>
         {/* Expanded content */}
-        {expanded ? (
+        {!compact && expanded ? (
           <div className="flex flex-col gap-4 h-auto">
             <div className="grid grid-cols-3  gap-auto">
               <div className="flex items-center justify-between col-span-3 px-2">

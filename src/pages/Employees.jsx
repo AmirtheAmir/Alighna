@@ -3,9 +3,8 @@ import PlusIcon from "../assets/icons/plus.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import MiniIcon from "../assets/icons/mini.svg?react";
 import MaxIcon from "../assets/icons/max.svg?react";
-import FilterUpIcon from "../assets/icons/sortUp.svg?react";
-import FilterDownIcon from "../assets/icons/sortDown.svg?react";
 import EmployeeCard from "../components/EmployeeCard.jsx";
+import { useState, useMemo } from "react";
 // import andreas from "../assets/images/andreas.jpg";
 // import anton from "../assets/images/anton.jpg";
 // import anna from "../assets/images/anna.jpg";
@@ -17,6 +16,13 @@ import EmployeeCard from "../components/EmployeeCard.jsx";
 // import lucas from "../assets/images/lucas.jpg";
 
 function Employees() {
+  const [compact, setCompact] = useState(false);
+  const toggleCompact = () => setCompact((v) => !v);
+
+  const [searchText, setSearchText] = useState("");
+
+  const [activeTab, setActiveTab] = useState("all");
+
   const employees = [
     {
       id: 1,
@@ -136,6 +142,126 @@ function Employees() {
       dates: { since: "2024-05-13" },
     },
   ];
+
+  const filteredEmployees = employees.filter((emp) => {
+    const q = searchText.trim().toLowerCase();
+    if (!q) return true; // no search => show all
+
+    const fullName = `${emp.firstName ?? ""} ${
+      emp.lastName ?? ""
+    }`.toLowerCase();
+    return fullName.includes(q);
+  });
+
+  const STATUS_GROUPS = [
+    { key: "working", title: "Working", dot: "bg-green-primary" },
+    { key: "vacation", title: "On Vacation", dot: "bg-cyan-primary" },
+    { key: "leave", title: "On Leave", dot: "bg-yellow-primary" },
+    { key: "terminated", title: "Terminated", dot: "bg-red-primary" },
+  ];
+
+  function getGroupKey(status) {
+    const s = (status ?? "").toLowerCase();
+
+    if (s === "vacation") return "vacation";
+    if (s === "terminated") return "terminated";
+    // treat these as “leave”
+    if (s === "sick" || s === "suspended" || s === "notice") return "leave";
+    // active + probation = working (your choice)
+    return "working";
+  }
+
+  const groupedByStatus = filteredEmployees.reduce((acc, emp) => {
+    const groupKey = getGroupKey(emp.status);
+    (acc[groupKey] ||= []).push(emp);
+    return acc;
+  }, {});
+
+  const TYPE_GROUPS = [
+    { key: "full-time", title: "Full-time", dot: "bg-green-primary" },
+    { key: "part-time", title: "Part-time", dot: "bg-cyan-primary" },
+    { key: "contractor", title: "Contractor", dot: "bg-yellow-primary" },
+  ];
+
+  function getTypeKey(type) {
+    const t = (type ?? "").toLowerCase().trim();
+    if (t.includes("part")) return "part-time";
+    if (t.includes("contract")) return "contractor";
+    return "full-time";
+  }
+
+  const groupedByType = useMemo(() => {
+    return filteredEmployees.reduce((acc, emp) => {
+      const key = getTypeKey(emp.type);
+      (acc[key] ||= []).push(emp);
+      return acc;
+    }, {});
+  }, [filteredEmployees]);
+
+  const DEPARTMENT_GROUPS = [
+    { key: "Design", title: "Design", dot: "bg-cyan-primary" },
+    { key: "Engineering", title: "Engineering", dot: "bg-green-primary" },
+    { key: "Marketing", title: "Marketing", dot: "bg-yellow-primary" },
+    { key: "Analytics", title: "Analytics", dot: "bg-green-primary" },
+    { key: "Human Resources", title: "Human Resources", dot: "bg-red-primary" },
+  ];
+
+  function getDepartmentKey(dept) {
+    const d = (dept ?? "").trim();
+    // If department is unknown or new, you can return "Other"
+    return d || "Other";
+  }
+
+  const groupedByDepartment = useMemo(() => {
+    return filteredEmployees.reduce((acc, emp) => {
+      const key = getDepartmentKey(emp.department);
+      (acc[key] ||= []).push(emp);
+      return acc;
+    }, {});
+  }, [filteredEmployees]);
+
+  function ColumnView({ groups, groupedData }) {
+    return (
+      <div className="grid grid-cols-3 gap-2 overflow-x-auto items-start">
+        {groups.map((group) => {
+          const items = groupedData[group.key] ?? [];
+          return (
+            <div
+              key={group.key}
+              className="rounded-3xl bg-bg-base p-2 flex flex-col gap-4"
+            >
+              {/* column header */}
+              <div className="flex items-center gap-2 px-4 pt-2">
+                <span className={`h-2.5 w-2.5 rounded-full ${group.dot}`} />
+                <span className="size-m-600 text-muted">{group.title}</span>
+                <span className="size-m-500 text-secondary">
+                  {items.length}
+                </span>
+              </div>
+
+              {/* cards list */}
+              <div className="flex flex-col w-93.25 shrink-0 gap-4">
+                {items.length === 0 ? (
+                  <div className="text-muted size-s-500 py-2">No employees</div>
+                ) : (
+                  items.map((emp) => (
+                    <EmployeeCard key={emp.id} {...emp} compact={compact} />
+                  ))
+                )}
+              </div>
+
+              <button
+                type="button"
+                className="mt-2 flex items-center gap-2 text-secondary hover:text-primary size-s-600"
+              >
+                <span className="text-lg leading-none">+</span> Add New
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
   return (
     <div className="h-full flex flex-col bg-bg-surface-primary gap-6 p-6 rounded-3xl">
       {/* employee page url */}
@@ -167,26 +293,51 @@ function Employees() {
           {/* Left: filter tabs */}
           <div className="flex items-center gap-2 p-1 bg-bg-base rounded-14">
             <button
-              className="hover:text-primary hover:bg-bg-elevated-primary rounded-xl text-secondary transition-colors duration-150 px-4.5 py-1.5 size-s-600"
               type="button"
+              onClick={() => setActiveTab("all")}
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+    ${
+      activeTab === "all"
+        ? "bg-bg-elevated-primary text-primary"
+        : "text-secondary hover:text-primary hover:bg-bg-elevated-primary"
+    }`}
             >
               All
             </button>
             <button
-              className="hover:text-primary hover:bg-bg-elevated-primary rounded-xl text-secondary transition-colors duration-150 px-4.5 py-1.5 size-s-600"
               type="button"
+              onClick={() => setActiveTab("status")}
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+    ${
+      activeTab === "status"
+        ? "bg-bg-elevated-primary text-primary"
+        : "text-secondary hover:text-primary hover:bg-bg-elevated-primary"
+    }`}
             >
               Status
             </button>
             <button
-              className="hover:text-primary hover:bg-bg-elevated-primary rounded-xl text-secondary transition-colors duration-150 px-4.5 py-1.5 size-s-600"
               type="button"
+              onClick={() => setActiveTab("type")}
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+                ${
+                  activeTab === "type"
+                    ? "bg-bg-elevated-primary text-primary"
+                    : "text-secondary hover:text-primary hover:bg-bg-elevated-primary"
+                }`}
             >
               Type
             </button>
+
             <button
-              className="hover:text-primary hover:bg-bg-elevated-primary rounded-xl text-secondary transition-colors duration-150 px-4.5 py-1.5 size-s-600"
               type="button"
+              onClick={() => setActiveTab("department")}
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+                ${
+                  activeTab === "department"
+                    ? "bg-bg-elevated-primary text-primary"
+                    : "text-secondary hover:text-primary hover:bg-bg-elevated-primary"
+                }`}
             >
               Department
             </button>
@@ -194,24 +345,30 @@ function Employees() {
           {/* Right: controls */}
           <div className="flex items-center gap-4">
             <button
-              className="flex flex-row rounded-14 items-center hover:bg-bg-elevated-hover duration-150 transition-colors bg-bg-elevated-primary gap-1.5 py-2.5 pl-3 pr-4.5"
+              className="flex flex-row rounded-14 items-center hover:bg-bg-elevated-hover duration-300 transition-colors bg-bg-elevated-primary gap-1.5 py-2.5 px-4.5"
               type="button"
+              onClick={toggleCompact}
             >
-              <MaxIcon className="h-4.5 w-4.5 text-muted " />
-              <span className="text-primary size-s-600">Full</span>
-            </button>
-            <button
-              className="flex flex-row rounded-14 items-center hover:bg-bg-elevated-hover duration-150 transition-colors bg-bg-elevated-primary gap-1.5 py-2.5 pl-3 pr-4.5"
-              type="button"
-            >
-              <FilterDownIcon className="h-4.5 w-4.5 text-muted" />
-              <span className="text-primary size-s-600">Sort</span>
+              {compact ? (
+                <>
+                  <MaxIcon className="h-4.5 w-4.5 text-muted" />
+                  <span className="text-primary  size-s-600">Mini</span>
+                </>
+              ) : (
+                <>
+                  <MiniIcon className="h-4.5 w-4.5 text-muted" />
+                  <span className="text-primary  size-s-600">Full</span>
+                </>
+              )}
+              {/* <MaxIcon className="h-4.5 w-4.5 text-muted " /> */}
             </button>
             <div className="flex flex-row py-2.5 pl-2.5 pr-4 group focus-within:ring-2 focus-within:ring-border-active transition-all duration-150 ease-in justify-center items-center rounded-14 bg-bg-base hover:bg-bg-elevated-primary gap-2.5">
               <SearchIcon className="text-disabled group-focus-within:text-primary shrink-0" />
               <input
                 type="text"
                 placeholder="Search"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
                 className="w-full text-primary size-s-600 placeholder:size-s-500 placeholder:text-muted outline-none"
               />
             </div>
@@ -220,17 +377,37 @@ function Employees() {
       </div>
       {/* employee cards */}
       <div className="flex-1 overflow-y-auto custom-scroll pr-2">
-        <div className=" grid gap-4 items-start grid-cols-4 ">
-          {employees.map((emp) => (
-            <EmployeeCard
-              className=""
-              key={emp.id}
-              {...emp}
-              defaultExpanded={true}
-              onClick={() => console.log("open employee", emp.id)}
-            />
-          ))}
-        </div>
+        {activeTab === "all" ? (
+          <div className="grid gap-4 items-start grid-cols-3">
+            {filteredEmployees.length === 0 ? (
+              <div className="col-span-4 text-muted size-s-500 px-2 py-6">
+                No records found.
+              </div>
+            ) : (
+              filteredEmployees.map((emp) => (
+                <EmployeeCard key={emp.id} {...emp} compact={compact} />
+              ))
+            )}
+          </div>
+        ) : activeTab === "status" ? (
+          <ColumnView groups={STATUS_GROUPS} groupedData={groupedByStatus} />
+        ) : activeTab === "type" ? (
+          <ColumnView groups={TYPE_GROUPS} groupedData={groupedByType} />
+        ) : (
+          // department
+          <ColumnView groups={DEPARTMENT_GROUPS} groupedData={groupedByDepartment} />
+        )}
+        {/* <div className=" grid gap-4 items-start grid-cols-4 ">
+          {filteredEmployees.length === 0 ? (
+            <div className="col-span-4 text-muted size-s-500 px-2 py-6">
+              No records found.
+            </div>
+          ) : (
+            filteredEmployees.map((emp) => (
+              <EmployeeCard key={emp.id} {...emp} compact={compact} />
+            ))
+          )}
+        </div> */}
       </div>
     </div>
   );
