@@ -220,7 +220,7 @@ function Employees() {
     }, {});
   }, [filteredEmployees]);
 
-  function ColumnView({ groups, groupedData }) {
+  function ColumnView({ groups, groupedData, variant = "status" }) {
     return (
       <div className="grid grid-cols-3 gap-2 overflow-x-auto items-start">
         {groups.map((group) => {
@@ -230,15 +230,28 @@ function Employees() {
               key={group.key}
               className="rounded-3xl bg-bg-base p-2 flex flex-col gap-4"
             >
-              {/* column header */}
-              <div className="flex items-center gap-2 px-4 pt-2">
-                <span className={`h-2.5 w-2.5 rounded-full ${group.dot}`} />
-                <span className="size-m-600 text-muted">{group.title}</span>
-                <span className="size-m-500 text-secondary">
-                  {items.length}
-                </span>
-              </div>
-
+              {variant === "status" ? (
+                // ✅ STATUS: dot + title + count
+                <div className="flex items-center gap-2 px-4 py-2">
+                  <span className={`h-2.5 w-2.5 rounded-full ${group.dot}`} />
+                  <span className="size-m-600 text-disabled">{group.title}</span>
+                  <span className="size-m-800 text-disabled">
+                    {items.length}
+                  </span>
+                </div>
+              ) : variant === "type" ? (
+                // ✅ TYPE: bordered pill title only (no dot, no count)
+                <div className="">
+                  <span className="inline-flex items-center rounded-full ring ring-border-primary px-4.5 py-2 size-m-600 text-disabled">
+                    {group.title}
+                  </span>
+                </div>
+              ) : (
+                // ✅ DEPARTMENT: simple label only (no dot, no count)
+                <div className="px-4 py-2">
+                  <span className="size-m-600 text-disabled">{group.title}</span>
+                </div>
+              )}
               {/* cards list */}
               <div className="flex flex-col w-93.25 shrink-0 gap-4">
                 {items.length === 0 ? (
@@ -249,10 +262,9 @@ function Employees() {
                   ))
                 )}
               </div>
-
               <button
                 type="button"
-                className="mt-2 flex items-center gap-2 text-secondary hover:text-primary size-s-600"
+                className="px-4 py-2 flex items-center gap-2 transition duration-300 text-muted hover:text-primary size-s-600"
               >
                 <span className="text-lg leading-none">+</span> Add New
               </button>
@@ -281,7 +293,7 @@ function Employees() {
         {/* Action button */}
         <button
           type="button"
-          className=" flex items-center flex-row gap-1.5 rounded-14 pl-4 pr-4.5 py-2.5 bg-brand-primary text-unchanged size-s-600 transition duration-150 hover:ring-2 hover:ring-brand-primary  hover:text-brand-primary hover:bg-transparent"
+          className=" flex items-center flex-row gap-1.5 rounded-14 pl-4 pr-4.5 py-2.5 bg-brand-primary text-unchanged size-s-600 transition duration-300 hover:ring-2 hover:ring-brand-primary  hover:text-brand-primary hover:bg-transparent"
         >
           <PlusIcon className="text-current" />
           Add New
@@ -295,7 +307,7 @@ function Employees() {
             <button
               type="button"
               onClick={() => setActiveTab("all")}
-              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-300
     ${
       activeTab === "all"
         ? "bg-bg-elevated-primary text-primary"
@@ -307,7 +319,7 @@ function Employees() {
             <button
               type="button"
               onClick={() => setActiveTab("status")}
-              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-300
     ${
       activeTab === "status"
         ? "bg-bg-elevated-primary text-primary"
@@ -319,7 +331,7 @@ function Employees() {
             <button
               type="button"
               onClick={() => setActiveTab("type")}
-              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-300
                 ${
                   activeTab === "type"
                     ? "bg-bg-elevated-primary text-primary"
@@ -332,7 +344,7 @@ function Employees() {
             <button
               type="button"
               onClick={() => setActiveTab("department")}
-              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-150
+              className={`rounded-xl px-4.5 py-1.5 size-s-600 transition-colors duration-300
                 ${
                   activeTab === "department"
                     ? "bg-bg-elevated-primary text-primary"
@@ -362,7 +374,7 @@ function Employees() {
               )}
               {/* <MaxIcon className="h-4.5 w-4.5 text-muted " /> */}
             </button>
-            <div className="flex flex-row py-2.5 pl-2.5 pr-4 group focus-within:ring-2 focus-within:ring-border-active transition-all duration-150 ease-in justify-center items-center rounded-14 bg-bg-base hover:bg-bg-elevated-primary gap-2.5">
+            <div className="flex flex-row py-2.5 pl-2.5 pr-4 group focus-within:ring-2 focus-within:ring-border-active transition-all duration-300 ease-in justify-center items-center rounded-14 bg-bg-base hover:bg-bg-elevated-primary gap-2.5">
               <SearchIcon className="text-disabled group-focus-within:text-primary shrink-0" />
               <input
                 type="text"
@@ -390,12 +402,24 @@ function Employees() {
             )}
           </div>
         ) : activeTab === "status" ? (
-          <ColumnView groups={STATUS_GROUPS} groupedData={groupedByStatus} />
+          <ColumnView
+            variant="status"
+            groups={STATUS_GROUPS}
+            groupedData={groupedByStatus}
+          />
         ) : activeTab === "type" ? (
-          <ColumnView groups={TYPE_GROUPS} groupedData={groupedByType} />
+          <ColumnView
+            variant="type"
+            groups={TYPE_GROUPS}
+            groupedData={groupedByType}
+          />
         ) : (
           // department
-          <ColumnView groups={DEPARTMENT_GROUPS} groupedData={groupedByDepartment} />
+          <ColumnView
+            variant="department"
+            groups={DEPARTMENT_GROUPS}
+            groupedData={groupedByDepartment}
+          />
         )}
         {/* <div className=" grid gap-4 items-start grid-cols-4 ">
           {filteredEmployees.length === 0 ? (

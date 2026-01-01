@@ -100,7 +100,7 @@ function Sidebar() {
             </button>
           </div>
           {/* search container */}
-          <div className="flex flex-row py-3 pl-3 pr-4.5 group focus-within:ring-2 focus-within:ring-border-active transition-all duration-150 ease-in justify-center items-center rounded-14 bg-bg-surface-primary hover:bg-bg-surface-hover">
+          <div className="flex flex-row py-3 pl-3 pr-4.5 group focus-within:ring-2 focus-within:ring-border-active transition-all duration-300 ease-in justify-center items-center rounded-14 bg-bg-surface-primary hover:bg-bg-surface-hover">
             {/* search icon & text */}
             <div
               ref={searchWrapRef}
@@ -144,7 +144,7 @@ function Sidebar() {
                       setQuery("");
                     }}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
+                      `flex items-center gap-3 rounded-14 p-3 transition duration-300 ease-in 
               ${
                 isActive
                   ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"
@@ -171,7 +171,7 @@ function Sidebar() {
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
+                      `flex items-center gap-3 rounded-14 p-3 transition duration-300 ease-in 
               ${
                 isActive
                   ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"
@@ -191,7 +191,7 @@ function Sidebar() {
                     key={to}
                     to={to}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
+                      `flex items-center gap-3 rounded-14 p-3 transition duration-300 ease-in 
               ${
                 isActive
                   ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"
@@ -217,7 +217,7 @@ function Sidebar() {
               to={to}
               // end={to === "/"}
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded-14 p-3 transition duration-150 ease-in 
+                `flex items-center gap-3 rounded-14 p-3 transition duration-300 ease-in 
          ${
            isActive
              ? "bg-bg-surface-primary ring-2 ring-border-active text-primary"

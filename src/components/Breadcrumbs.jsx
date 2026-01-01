@@ -22,13 +22,13 @@ export default function Breadcrumbs() {
           <>
             <RightIcon />
             {isLast ? (
-              <span className="size-s-600 text-muted hover:text-secondary transition-colors duration-150">
+              <span className="size-s-600 text-muted hover:text-secondary transition-colors duration-300">
                 {capitalize(crumb.label)}
               </span>
             ) : (
               <NavLink
                 to={crumb.to}
-                className="size-s-600 text-disabled hover:text-muted transition-colors duration-150"
+                className="size-s-600 text-disabled hover:text-muted transition-colors duration-300"
               >
                 {capitalize(crumb.label)}
               </NavLink>
