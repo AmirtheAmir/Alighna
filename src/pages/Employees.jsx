@@ -225,6 +225,8 @@ function Employees() {
       <div className="grid grid-cols-3 gap-2 overflow-x-auto items-start">
         {groups.map((group) => {
           const items = groupedData[group.key] ?? [];
+          console.log("TAB:", variant, "GROUP:", group.key, "COUNT:", items.length);
+
           return (
             <div
               key={group.key}
@@ -241,24 +243,25 @@ function Employees() {
                 </div>
               ) : variant === "type" ? (
                 // ✅ TYPE: bordered pill title only (no dot, no count)
-                <div className="">
+                <div className="gap-2 flex flex-row items-center ">
                   <span className="inline-flex items-center rounded-full ring ring-border-primary px-4.5 py-2 size-m-600 text-disabled">
                     {group.title}
                   </span>
+                  <span className="size-m-600 text-disabled">{items.length}</span>
                 </div>
               ) : (
                 // ✅ DEPARTMENT: simple label only (no dot, no count)
-                <div className="px-4 py-2">
+                <div className="px-4 py-2 gap-2 flex flex-row">
                   <span className="size-m-600 text-disabled">{group.title}</span>
+                  <span className="size-m-600 text-disabled">{items.length}</span>
                 </div>
               )}
-              {/* cards list */}
-              <div className="flex flex-col w-93.25 shrink-0 gap-4">
+              <div className="flex flex-col shrink-0 gap-4">
                 {items.length === 0 ? (
                   <div className="text-muted size-s-500 py-2">No employees</div>
                 ) : (
                   items.map((emp) => (
-                    <EmployeeCard key={emp.id} {...emp} compact={compact} />
+                    <EmployeeCard key={emp.id} {...emp} compact={compact} view={activeTab}/>
                   ))
                 )}
               </div>
@@ -397,7 +400,7 @@ function Employees() {
               </div>
             ) : (
               filteredEmployees.map((emp) => (
-                <EmployeeCard key={emp.id} {...emp} compact={compact} />
+                <EmployeeCard key={emp.id} {...emp} compact={compact} view={activeTab}/>
               ))
             )}
           </div>
@@ -405,20 +408,20 @@ function Employees() {
           <ColumnView
             variant="status"
             groups={STATUS_GROUPS}
-            groupedData={groupedByStatus}
+            groupedData={groupedByStatus} view={activeTab}
           />
         ) : activeTab === "type" ? (
           <ColumnView
             variant="type"
             groups={TYPE_GROUPS}
-            groupedData={groupedByType}
+            groupedData={groupedByType} view={activeTab}
           />
         ) : (
           // department
           <ColumnView
             variant="department"
             groups={DEPARTMENT_GROUPS}
-            groupedData={groupedByDepartment}
+            groupedData={groupedByDepartment} view={activeTab}
           />
         )}
         {/* <div className=" grid gap-4 items-start grid-cols-4 ">

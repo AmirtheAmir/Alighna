@@ -37,7 +37,7 @@ function Sidebar() {
     { label: "Help", to: "/help", Icon: HelpIcon },
   ];
 
-  const navLogo = { label: "lighna", to: "/", Icon: LogoIcon };
+  const navLogo = { label: "Alighna", to: "/", Icon: LogoIcon };
 
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
@@ -239,10 +239,7 @@ function Sidebar() {
               className="
               flex items-center"
             >
-              <navLogo.Icon className="text-current" />
-              <span className="text-brand-primary mt-1 logo-text ">
-                {navLogo.label}
-              </span>
+              <navLogo.Icon className="text-current" /> 
             </NavLink>
           </div>
           <SidebarIcon className="text-disabled cursor-pointer" />
