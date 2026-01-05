@@ -5,6 +5,7 @@ import MiniIcon from "../assets/icons/mini.svg?react";
 import MaxIcon from "../assets/icons/max.svg?react";
 import EmployeeCard from "../components/EmployeeCard.jsx";
 import { useState, useMemo } from "react";
+import useDragScroll from "../components/UseDragScroll.jsx";
 // import andreas from "../assets/images/andreas.jpg";
 // import anton from "../assets/images/anton.jpg";
 // import anna from "../assets/images/anna.jpg";
@@ -221,8 +222,9 @@ function Employees() {
   }, [filteredEmployees]);
 
   function ColumnView({ groups, groupedData, variant = "status" }) {
+      const dragRef = useDragScroll();
     return (
-      <div className="grid grid-cols-3 gap-2 overflow-x-auto items-start">
+      <div ref={dragRef} className="flex flex-row gap-2 overflow-x-scroll overflow-hidden scrollbar-none cursor-grab active:cursor-grabbing items-start">
         {groups.map((group) => {
           const items = groupedData[group.key] ?? [];
           console.log("TAB:", variant, "GROUP:", group.key, "COUNT:", items.length);
@@ -278,9 +280,9 @@ function Employees() {
     );
   }
   return (
-    <div className="h-full flex flex-col bg-bg-surface-primary gap-6 p-6 rounded-3xl">
-      {/* employee page url */}
-      <div>
+    <div className="h-full w-full min-w-0 flex flex-col bg-bg-surface-primary gap-6 p-6 rounded-3xl">
+      {/* breadcrumbs */}
+      <div className="w-full">
         {/* <RightIcon className="text-disabled" /> */}
         <Breadcrumbs />
       </div>
@@ -303,8 +305,8 @@ function Employees() {
         </button>
       </div>
       {/* filter bar */}
-      <div className="w-full">
-        <div className="flex items-center justify-between w-full">
+      <div className="w-full bg-amber-200">
+        <div className="flex items-center justify-between min-w-0 w-full">
           {/* Left: filter tabs */}
           <div className="flex items-center gap-2 p-1 bg-bg-base rounded-14">
             <button
@@ -391,9 +393,9 @@ function Employees() {
         </div>
       </div>
       {/* employee cards */}
-      <div className="flex-1 overflow-y-auto custom-scroll pr-2">
+      <div className=" overflow-y-scroll custom-scroll pr-2">
         {activeTab === "all" ? (
-          <div className="grid gap-4 items-start grid-cols-3">
+          <div className="flex flex-wrap gap-4 items-start">
             {filteredEmployees.length === 0 ? (
               <div className="col-span-4 text-muted size-s-500 px-2 py-6">
                 No records found.
@@ -424,17 +426,6 @@ function Employees() {
             groupedData={groupedByDepartment} view={activeTab}
           />
         )}
-        {/* <div className=" grid gap-4 items-start grid-cols-4 ">
-          {filteredEmployees.length === 0 ? (
-            <div className="col-span-4 text-muted size-s-500 px-2 py-6">
-              No records found.
-            </div>
-          ) : (
-            filteredEmployees.map((emp) => (
-              <EmployeeCard key={emp.id} {...emp} compact={compact} />
-            ))
-          )}
-        </div> */}
       </div>
     </div>
   );

@@ -121,7 +121,7 @@ export default function EmployeeCard({
   return (
     <div
       onClick={onClick}
-      className="w-full rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2
+      className="w-125 rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2
         px-2 pt-2 pb-4"
     >
       <div className="flex items-start justify-between flex-col gap-4 ">

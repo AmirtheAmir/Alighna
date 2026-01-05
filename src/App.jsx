@@ -6,13 +6,14 @@ import StartingPage from "./pages/StartingPage";
 
 function App() {
   return (
-    <div className="h-dvh p-2 box-border">
+    <div className="h-dvh p-2 overflow-hidden">
       {/* Sidebar and Employee page */}
-      <div className="flex h-full gap-6">
-        <div  className="w-1/6">
+      <div className="flex flex-row h-full gap-6">
+        {/* <div  className="w-1/6"> */}
+        <div  className="w-70 shrink-0">
           <Sidebar />
         </div>
-        <div className="flex-1">
+        <div className="w-full">
           <Routes>
             <Route path="/employees" element={<Employees />}/>
             <Route path="/" element={<StartingPage />} />

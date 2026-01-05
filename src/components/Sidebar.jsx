@@ -13,8 +13,6 @@ import HelpIcon from "../assets/icons/help.svg?react";
 import InboxIcon from "../assets/icons/inbox.svg?react";
 import LogoIcon from "../assets/icons/logo.svg?react";
 
-import AmeliaImg from "../assets/images/amelia.jpg";
-
 import { NavLink } from "react-router-dom";
 import { useEffect, useState, useRef, useMemo } from "react";
 
@@ -77,12 +75,9 @@ function Sidebar() {
           <div className="flex flex-row py-1 pl-1 pr-3 rounded-2xl bg-bg-surface-primary hover:bg-bg-surface-hover transition-all duration-200 ease-in">
             {/* profile account */}
             <div className="flex flex-row gap-2  ">
-
-              <img
-                src={AmeliaImg}
-                alt="Amelia Nowak"
-                className="h-11 w-11 rounded-xl"
-              />
+              <div className="h-11 w-11 rounded-xl flex justify-center items-center border-2 border-border-primary text-primary size-s-600">
+                <span>AN</span>
+              </div>
               <div className="flex flex-col  justify-center ">
                 <p className=" text-xl text-primary size-m-600">Amelia Nowak</p>
                 <p className="text-m text-secondary size-s-500">
@@ -239,7 +234,7 @@ function Sidebar() {
               className="
               flex items-center"
             >
-              <navLogo.Icon className="text-current" /> 
+              <navLogo.Icon className="text-current" />
             </NavLink>
           </div>
           <SidebarIcon className="text-disabled cursor-pointer" />

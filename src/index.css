@@ -56,6 +56,20 @@ body {
 .rounded-20 {
   border-radius: 20px;
 }
+/* 3XL — 36px */
+.size-3xl-400 {
+  font-size: 36px;
+  font-weight: 200;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+}
+.size-3xl-600 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0.02em;
+  font-style: italic;
+}
 
 /* 2XL — 24px */
 .size-2xl-400 {
@@ -206,16 +220,28 @@ body {
   color: #C0C0C0;
 }
 
-.custom-scroll::-webkit-scrollbar-button {
-  display: none;
+.logo-text {
+  font-family: "Fjalla One", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  line-height: 23px;
+  letter-spacing: 0em;
+  color: #C0C0C0;
 }
+
+
+
 .custom-scroll::-webkit-scrollbar {
   width: 4px;
-}
-.custom-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  height: 4px;
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: oklch(0.2603 0 0); /* change color */
-  border-radius: 999px;
+  background: var(--color-border-tertiary);
+  border-radius: 10px;
 }
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-secondary);
+}
+
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
