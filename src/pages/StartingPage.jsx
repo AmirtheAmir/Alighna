@@ -1,6 +1,6 @@
 export default function StartingPage() {
   return (
-    <div className="h-full bg-bg-surface-primary  overflow-y-auto rounded-3xl flex justify-center items-center">
+    <div className="h-full bg-bg-surface-primary w-100vw overflow-y-auto rounded-3xl flex justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-2 w-1/3">
         <div className="flex flew-row gap-2 items-center">
           <span className="text-primary size-3xl-400">Welcome to</span>

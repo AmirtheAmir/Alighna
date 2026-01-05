@@ -13,7 +13,7 @@ function App() {
         <div  className="w-70 shrink-0">
           <Sidebar />
         </div>
-        <div className="w-full">
+        <div className="min-w-0 flex-1">
           <Routes>
             <Route path="/employees" element={<Employees />}/>
             <Route path="/" element={<StartingPage />} />

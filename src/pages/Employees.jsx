@@ -282,12 +282,12 @@ function Employees() {
   return (
     <div className="h-full w-full min-w-0 flex flex-col bg-bg-surface-primary gap-6 p-6 rounded-3xl">
       {/* breadcrumbs */}
-      <div className="w-full">
+      <div className="w-full flex">
         {/* <RightIcon className="text-disabled" /> */}
         <Breadcrumbs />
       </div>
       {/* title text */}
-      <div className="flex flex-row w-full justify-between items-center ">
+      <div className="flex flex-row justify-between items-center ">
         <div className="flex flex-col gap-1 ">
           <h1 className="size-2xl-600 text-primary ">Employees</h1>
           <p className="text-secondary size-m-400 w-full">
@@ -305,7 +305,7 @@ function Employees() {
         </button>
       </div>
       {/* filter bar */}
-      <div className="w-full bg-amber-200">
+      <div className="min-w-auto">
         <div className="flex items-center justify-between min-w-0 w-full">
           {/* Left: filter tabs */}
           <div className="flex items-center gap-2 p-1 bg-bg-base rounded-14">
