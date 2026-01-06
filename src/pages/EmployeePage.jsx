@@ -1,4 +1,4 @@
-import Breadcrumbs from "../components/Breadcrumbs";
+import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import PlusIcon from "../assets/icons/plus.svg?react";
 import SearchIcon from "../assets/icons/search.svg?react";
 import MiniIcon from "../assets/icons/mini.svg?react";
@@ -6,17 +6,8 @@ import MaxIcon from "../assets/icons/max.svg?react";
 import EmployeeCard from "../components/EmployeeCard.jsx";
 import { useState, useMemo } from "react";
 import useDragScroll from "../components/UseDragScroll.jsx";
-// import andreas from "../assets/images/andreas.jpg";
-// import anton from "../assets/images/anton.jpg";
-// import anna from "../assets/images/anna.jpg";
-// import alva from "../assets/images/alva.jpeg";
-// import adam from "../assets/images/adam.jpg";
-// import amanda from "../assets/images/amanda.jpg";
-// import eric from "../assets/images/eric.jpg";
-// import sofia from "../assets/images/sofia.jpg";
-// import lucas from "../assets/images/lucas.jpg";
 
-function Employees() {
+function EmployeePage() {
   const [compact, setCompact] = useState(false);
   const toggleCompact = () => setCompact((v) => !v);
 
@@ -431,4 +422,4 @@ function Employees() {
   );
 }
 
-export default Employees;
+export default  EmployeePage;

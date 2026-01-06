@@ -103,6 +103,8 @@ export default function EmployeeCard({
     setExpanded(!compact);
   }, [compact]);
 
+
+  
   const statusKey = status?.toLowerCase();
   const statusStyle = STATUS_STYLES[statusKey] ?? STATUS_STYLES.active;
 
