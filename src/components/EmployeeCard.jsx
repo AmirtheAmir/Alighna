@@ -163,7 +163,7 @@ export default function EmployeeCard({
             className="flex items-center justify-center"
             aria-label="Open employee menu"
           >
-            <MoreIcon className="text-primary" />
+            <MoreIcon className="text-primary cursor-pointer" />
           </button>
         </div>
       </div>
