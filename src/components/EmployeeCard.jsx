@@ -1,6 +1,7 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import MoreIcon from "../assets/icons/more.svg?react";
 import DownIcon from "../assets/icons/down.svg?react";
+import EmployeeMoreMenu from "./MoreMenu";
 
 const STATUS_STYLES = {
   active: {
@@ -98,13 +99,11 @@ export default function EmployeeCard({
   compact = false,
 }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
-  
+
   useEffect(() => {
     setExpanded(!compact);
   }, [compact]);
 
-
-  
   const statusKey = status?.toLowerCase();
   const statusStyle = STATUS_STYLES[statusKey] ?? STATUS_STYLES.active;
 
@@ -120,10 +119,21 @@ export default function EmployeeCard({
     e.stopPropagation(); // IMPORTANT: clicking icon shouldn't trigger card onClick
     setExpanded((v) => !v);
   };
+
+  // more menu stuff
+  const [menuOpen, setMenuOpen] = useState(false);
+  const moreBtnRef = useRef(null);
+
+  const openMenu = (e) => {
+    e.stopPropagation(); // don't trigger card click
+    setMenuOpen(true);
+  };
+
+  const closeMenu = () => setMenuOpen(false);
   return (
     <div
       onClick={onClick}
-      className="w-125 rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2
+      className="2xl:w-93 w-125 rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2
         px-2 pt-2 pb-4"
     >
       <div className="flex items-start justify-between flex-col gap-4 ">
@@ -146,7 +156,15 @@ export default function EmployeeCard({
               <div className="size-s-500 text-secondary">{title}</div>
             </div>
           </div>
-          <MoreIcon className=" text-primary" />
+          <button
+            type="button"
+            ref={moreBtnRef}
+            onClick={openMenu}
+            className="flex items-center justify-center"
+            aria-label="Open employee menu"
+          >
+            <MoreIcon className="text-primary" />
+          </button>
         </div>
       </div>
       <div className="h-0.5 w-full bg-border-secondary" />
@@ -232,6 +250,13 @@ export default function EmployeeCard({
                 ) : null}
               </div>
             ))}
+            <EmployeeMoreMenu
+              open={menuOpen}
+              onClose={closeMenu}
+              anchorRef={moreBtnRef}
+              statusKey={statusKey}
+              email={"adam.hensen@gmail.com"} // or pass a prop like `email`
+            />
           </div>
         ) : null}
       </div>
