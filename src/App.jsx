@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-import EmployeePage from "./pages/EmployeePage";
-import StartingPage from "./pages/StartingPage";
+import EmployeePage from "./components/Pages/EmployeePage";
+import WelcomePage from "./components/Pages/WelcomePage";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <div className="min-w-0 flex-1 overflow-hidden">
           <Routes>
             <Route path="/employees" element={<EmployeePage />}/>
-            <Route path="/" element={<StartingPage />} />
+            <Route path="/" element={<WelcomePage />} />
           </Routes>
         </div>
       </div>

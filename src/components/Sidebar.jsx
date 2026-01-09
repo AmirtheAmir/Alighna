@@ -118,7 +118,7 @@ function Sidebar() {
             <div className="flex flex-row items-center gap-0.5 ml-auto">
               <CommandIcon className=" text-disabled" />
               <span className="size-s-500 text-disabled">+</span>
-              <span className="size-s-500 text-disabled">F</span>
+              <span className="size-s-500 text-disabled">K</span>
             </div>
           </div>
         </div>
