@@ -1,7 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from "react";
-import MoreIcon from "../assets/icons/more.svg?react";
-import DownIcon from "../assets/icons/down.svg?react";
-import EmployeeMoreMenu from "./MoreMenu";
+import { MoreIcon, DownIcon } from "../../../assets";
+import EmployeeMoreMenu from "../../MoreMenu";
 
 const STATUS_STYLES = {
   active: {
@@ -43,7 +42,6 @@ const STATUS_STYLES = {
 
 function formatDate(value) {
   if (!value) return "";
-  // supports "2025-03-12" or Date
   const d = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(d.getTime())) return String(value);
   return d.toLocaleDateString("en-GB", {
@@ -54,22 +52,17 @@ function formatDate(value) {
 }
 
 function getDateRows(status, dates) {
-  // dates: { since, asOf, from, until }
   if (!status) return [];
   const s = status.toLowerCase();
-
   if (s === "active") {
     return [{ leftLabel: "Since", leftValue: formatDate(dates?.since) }];
   }
-
   if (s === "terminated") {
     return [{ leftLabel: "As of", leftValue: formatDate(dates?.asOf) }];
   }
-
   if (s === "suspended" || s === "notice") {
     return [{ leftLabel: "Until", leftValue: formatDate(dates?.until) }];
   }
-
   if (s === "vacation" || s === "sick" || s === "probation") {
     return [
       {
@@ -97,35 +90,30 @@ export default function EmployeeCard({
   defaultExpanded = true,
   onClick,
   compact = false,
+  layout = "column",
 }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
-
   useEffect(() => {
     setExpanded(!compact);
   }, [compact]);
 
   const statusKey = status?.toLowerCase();
   const statusStyle = STATUS_STYLES[statusKey] ?? STATUS_STYLES.active;
-
   const dateRows = useMemo(
     () => getDateRows(statusKey, dates),
     [statusKey, dates]
   );
-
   const fullName = `${firstName ?? ""} ${lastName ?? ""}`.trim();
   const place = [location?.country, location?.city].filter(Boolean).join(" , ");
-
   const toggle = (e) => {
-    e.stopPropagation(); // IMPORTANT: clicking icon shouldn't trigger card onClick
+    e.stopPropagation();
     setExpanded((v) => !v);
   };
-
-  // more menu stuff
   const [menuOpen, setMenuOpen] = useState(false);
   const moreBtnRef = useRef(null);
 
   const openMenu = (e) => {
-    e.stopPropagation(); // don't trigger card click
+    e.stopPropagation();
     setMenuOpen(true);
   };
 
@@ -133,11 +121,12 @@ export default function EmployeeCard({
   return (
     <div
       onClick={onClick}
-      className="2xl:w-93 w-125 rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2
-        px-2 pt-2 pb-4"
+      className={[
+        layout === "grid" ? "w-full" : "w-105",
+        "rounded-20 flex flex-col gap-4 bg-bg-elevated-primary border-border-secondary border-2 px-2 pt-2 pb-4",
+      ].join(" ")}
     >
       <div className="flex items-start justify-between flex-col gap-4 ">
-        {/* image and name and title */}
         <div className="flex items-center flex-row justify-between pr-2 py-1 pl-1 w-full rounded-xl">
           <div className="flex flex-row gap-2 items-center">
             <div className="h-12 w-12 ">
@@ -145,11 +134,7 @@ export default function EmployeeCard({
                 <span className="h-full w-full rounded-xl flex justify-center items-center border-2 border-border-primary text-primary size-s-600">
                   {avatar}
                 </span>
-              ) : // <img
-              //   src={avatar}
-              //   className="h-full w-full rounded-lg object-cover brightness-50"
-              // />
-              null}
+              ) : null}
             </div>
             <div className="flex flex-col">
               <div className=" size-l-600 text-primary">{fullName}</div>
@@ -186,13 +171,11 @@ export default function EmployeeCard({
               {statusStyle.label}
             </div>
           </div>
-          {/* department */}
           <div className="flex items-center flex-row px-2 justify-between">
             <span className="size-xs-500 text-muted">Department</span>
             <span className="size-s-600 text-primary">{department}</span>
           </div>
         </div>
-        {/* expand or retract icon */}
         <div className=" flex items-center gap-2 justify-center flex-col">
           <button
             type="button"
@@ -208,7 +191,6 @@ export default function EmployeeCard({
             />
           </button>
         </div>
-        {/* Expanded content */}
         {!compact && expanded ? (
           <div className="flex flex-col gap-4 h-auto">
             <div className="grid grid-cols-3  gap-auto">
@@ -224,7 +206,6 @@ export default function EmployeeCard({
               <span className="size-xs-500 text-muted">Location</span>
               <span className="size-s-600 text-primary">{place}</span>
             </div>
-            {/* Date row(s) */}
             {dateRows.map((row, i) => (
               <div
                 key={i}

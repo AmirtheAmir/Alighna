@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import RightIcon from "../assets/icons/right.svg?react";
+import { RightIcon } from "../../../assets";
 export default function Breadcrumbs() {
   const location = useLocation();
 

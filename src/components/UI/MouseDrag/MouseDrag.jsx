@@ -2,15 +2,12 @@ import { useRef, useEffect } from "react";
 
 export default function useDragScroll() {
   const ref = useRef(null);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
     let isDown = false;
     let startX = 0;
     let startScrollLeft = 0;
-
     const onDown = (e) => {
       // only left click
       if (e.button !== 0) return;
