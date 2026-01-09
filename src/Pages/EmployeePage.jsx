@@ -1,11 +1,11 @@
-import { Breadcrumbs } from "../Molecules/Breadcrumbs";
-import NewButton from "../Atoms/NewButton/NewButton.jsx";
-import FilterContainer from "../Molecules/FilterContainer/FilterContainer.jsx";
-import FullButton from "../Atoms/FullButton/FullButton.jsx";
-import { employees } from "../../data/employees.js";
-import GroupedCards from "../Molecules/GroupedCards/GroupedCards.jsx";
+import { Breadcrumbs } from "../components/Molecules/Breadcrumbs/index.jsx";
+import NewButton from "../components/Atoms/NewButton/NewButton.jsx";
+import FilterContainer from "../components/Molecules/FilterContainer/FilterContainer.jsx";
+import FullButton from "../components/Atoms/FullButton/FullButton.jsx";
+import { employees } from "../data/employees.js";
+import GroupedCards from "../components/Molecules/GroupedCards/GroupedCards.jsx";
 import SearchIcon from "../../assets/icons/search.svg?react";
-import { EmployeeCard } from "../Molecules/EmployeeCard";
+import { EmployeeCard } from "../components/Molecules/EmployeeCard/index.jsx";
 import {
   StatusGroups,
   TypeGroups,
@@ -13,15 +13,18 @@ import {
   getStatusGroupKey,
   getDepartmentGroupKey,
   getTypeGroupKey,
-} from "../../data/EmployeeGroups";
+} from "../data/EmployeeGroups/index.jsx";
 import { useState, useMemo } from "react";
 
 function EmployeePage() {
   const [compact, setCompact] = useState(false);
-  const toggleCompact = () => setCompact((v) => !v);
   const [searchText, setSearchText] = useState("");
   const [activeTab, setActiveTab] = useState("all");
 
+  const toggleCompact = () => setCompact((v) => !v);
+
+
+  // TODO: Optimize filtering and grouping with useMemo if performance issues arise 
   const filteredEmployees = employees.filter((emp) => {
     const q = searchText.trim().toLowerCase();
     if (!q) return true;
@@ -31,11 +34,14 @@ function EmployeePage() {
     return fullName.includes(q);
   });
 
-  const groupedByStatus = filteredEmployees.reduce((acc, emp) => {
-    const key = getStatusGroupKey(emp.status);
-    (acc[key] ||= []).push(emp);
-    return acc;
-  }, {});
+  // TODO: Optimize grouping with useMemo if performance issues arise
+  const groupedByStatus = useMemo(() => {
+    return filteredEmployees.reduce((acc, emp) => {
+      const key = getStatusGroupKey(emp.status);
+      (acc[key] ||= []).push(emp);
+      return acc;
+    }, {});
+  }, [filteredEmployees]);
 
   const groupedByType = useMemo(() => {
     return filteredEmployees.reduce((acc, emp) => {
