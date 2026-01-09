@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { MoreIcon, DownIcon } from "../../../assets";
-import EmployeeMoreMenu from "../../MoreMenu";
+import { MoreButtonMenu } from "../../UI/MoreButtonMenu";
 
 const STATUS_STYLES = {
   active: {
@@ -231,7 +231,7 @@ export default function EmployeeCard({
                 ) : null}
               </div>
             ))}
-            <EmployeeMoreMenu
+            <MoreButtonMenu
               open={menuOpen}
               onClose={closeMenu}
               anchorRef={moreBtnRef}

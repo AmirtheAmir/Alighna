@@ -4,7 +4,7 @@ import {
   StatusIcon,
   CopyIcon,
   DateIcon,
-  DepartmentIcon,
+  DepartmentsIcon,
   ExportIcon,
   LocationIcon,
   MailIcon,
@@ -89,7 +89,7 @@ export default function MoreMenu({
           {
             key: "department",
             label: "Department",
-            Icon: DepartmentIcon,
+            Icon: DepartmentsIcon,
             Right: RightIcon,
           },
           {
