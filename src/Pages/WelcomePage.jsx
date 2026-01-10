@@ -1,5 +1,5 @@
-import { RadialBg } from "../UI/RadialBg"; 
-import styles from "../UI/RadialBg/RadialBg.module.css";
+import { RadialBg } from "../components/UI/RadialBg"; 
+import styles from "../components/UI/RadialBg/RadialBg.module.css";
 
 export default function WelcomePage() {
   return (

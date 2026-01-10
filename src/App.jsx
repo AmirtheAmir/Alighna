@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { SideBar } from "./components/Oraganism/SideBar";
-import EmployeePage from "./components/Pages/EmployeePage";
-import WelcomePage from "./components/Pages/WelcomePage";
+import EmployeePage from "./Pages/EmployeePage"
+import WelcomePage from "./Pages/WelcomePage";
 
 function App() {
   return (

@@ -4,7 +4,7 @@ import FilterContainer from "../components/Molecules/FilterContainer/FilterConta
 import FullButton from "../components/Atoms/FullButton/FullButton.jsx";
 import { employees } from "../data/employees.js";
 import GroupedCards from "../components/Molecules/GroupedCards/GroupedCards.jsx";
-import SearchIcon from "../../assets/icons/search.svg?react";
+import SearchIcon from "../assets/icons/search.svg?react";
 import { EmployeeCard } from "../components/Molecules/EmployeeCard/index.jsx";
 import {
   StatusGroups,
@@ -23,18 +23,17 @@ function EmployeePage() {
 
   const toggleCompact = () => setCompact((v) => !v);
 
-
-  // TODO: Optimize filtering and grouping with useMemo if performance issues arise 
-  const filteredEmployees = employees.filter((emp) => {
+  const filteredEmployees = useMemo(() => {
     const q = searchText.trim().toLowerCase();
-    if (!q) return true;
-    const fullName = `${emp.firstName ?? ""} ${
-      emp.lastName ?? ""
-    }`.toLowerCase();
-    return fullName.includes(q);
-  });
+    if (!q) return employees;
 
-  // TODO: Optimize grouping with useMemo if performance issues arise
+    return employees.filter((emp) => {
+      const fullName = `${emp.firstName ?? ""} ${emp.lastName ?? ""}`.toLowerCase();
+      return fullName.includes(q);
+    });
+  }, [searchText]);
+
+  
   const groupedByStatus = useMemo(() => {
     return filteredEmployees.reduce((acc, emp) => {
       const key = getStatusGroupKey(emp.status);
@@ -99,11 +98,13 @@ function EmployeePage() {
       </div>
       <div className=" overflow-y-scroll custom-scroll pr-2">
         {activeTab === "all" ? (
-          <div className={
-            activeTab === "all"
-              ? "grid grid-cols-3 gap-4"
-              : "flex flex-wrap gap-4 items-start"
-          }>
+          <div
+            className={
+              activeTab === "all"
+                ? "grid grid-cols-3 gap-4"
+                : "flex flex-wrap gap-4 items-start"
+            }
+          >
             {filteredEmployees.length === 0 ? (
               <div className="col-span-4 text-muted size-s-500 px-2 py-6">
                 No records found.
