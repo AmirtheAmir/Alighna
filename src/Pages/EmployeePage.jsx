@@ -15,6 +15,8 @@ import {
   getTypeGroupKey,
 } from "../data/EmployeeGroups/index.jsx";
 import { useState, useMemo } from "react";
+import styles from "./ScrollStyle.module.css"
+
 
 function EmployeePage() {
   const [compact, setCompact] = useState(false);
@@ -96,7 +98,7 @@ function EmployeePage() {
           </div>
         </div>
       </div>
-      <div className=" overflow-y-scroll custom-scroll pr-2">
+      <div className={`overflow-y-scroll pr-2 ${styles.customScroll}`}>
         {activeTab === "all" ? (
           <div
             className={

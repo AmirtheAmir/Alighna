@@ -1,6 +1,6 @@
 import { MouseDrag } from "../../UI/MouseDrag";
 import { EmployeeCard } from "../EmployeeCard";
-
+import Styles from "./ScrollNoneStyle.module.css"
 export default function GroupedCards({
   groups,
   groupedData,
@@ -13,7 +13,7 @@ export default function GroupedCards({
   return (
     <div
       ref={dragRef}
-      className="flex flex-row gap-2 overflow-x-scroll overflow-hidden scrollbar-none cursor-grab active:cursor-grabbing items-start"
+      className={`flex flex-row gap-2 overflow-x-scroll overflow-hidden ${Styles.scrollbarNone} cursor-grab active:cursor-grabbing items-start`}
     >
       {groups.map((group) => {
         const items = groupedData[group.key] ?? [];

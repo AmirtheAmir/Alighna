@@ -3,54 +3,58 @@
 @tailwind utilities;
 
 @theme {
-  /* background colors */
+  /* background */
   --color-bg-base: oklch(0.1149 0 0);
   --color-bg-surface-primary: oklch(0.1684 0 0);
   --color-bg-surface-hover: oklch(0.1913 0 0);
   --color-bg-elevated-primary: oklch(0.2046 0 0);
   --color-bg-elevated-hover: oklch(0.2264 0 0);
 
-  /* text colors */
+  /* text */
   --color-primary: oklch(0.9067 0 0);
   --color-secondary: oklch(0.7476 0 0);
   --color-muted: oklch(0.5795 0 0);
   --color-disabled: oklch(0.36 0 0);
   --color-unchanged: oklch(0.1684 0 0);
 
-  /* border colors */
+  /* border */
   --color-border-primary: oklch(0.2603 0 0);
   --color-border-secondary: oklch(0.36 0 0);
   --color-border-tertiary: oklch(0.4386 0 0);
   --color-border-active: oklch(0.5103 0 0);
 
-  /* brand colors */
+  /* brand */
   --color-brand-primary: oklch(0.9551 0 0);
   --color-brand-secondary: oklch(0.9249 0 0);
 
-  /* pill colors */
+  /* pill */
   --color-cyan-primary: oklch(0.8442 0.145654 209.2851);
   --color-cyan-secondary: oklch(0.2032 0.0349 208.04);
   --color-cyan-background: oklch(0.2414 0.041262 205.4934);
+
   --color-yellow-primary: oklch(0.8555 0.174878 88.0084);
   --color-yellow-secondary: oklch(0.4415 0.0902 90.38);
   --color-yellow-background: oklch(0.2113 0.0434 94.54);
+
   --color-green-primary: oklch(0.8722 0.251776 148.1033);
   --color-green-secondary: oklch(0.4457 0.1246 149.37);
   --color-green-background: oklch(0.2101 0.0522 154.76);
+
   --color-red-primary: oklch(0.6288 0.2565 27.39);
   --color-red-secondary: oklch(0.3214 0.1304 25.27);
   --color-red-background: oklch(0.1516 0.0608 18.69);
 
-  /* font styles */
+  /* font style */
   --font-sans: "Inter", sans-serif;
 
-  /* background gradient colors */
-  --color1: 199, 215, 219;
-  --color2: 50, 74, 82;
-  --color3: 244, 247, 247;
-  --color4: 88, 123, 130;
-  --color5: 58, 78, 90;
-  --color-interactive: 88, 123, 130;
+  /* background gradient */
+  --grad-fg: 199, 215, 219;
+  --grad-deep: 50, 74, 82;
+  --grad-soft: 244, 247, 247;
+  --grad-accent: 88, 123, 130;
+  --grad-mid: 58, 78, 90;
+
+  --grad-interactive: 88, 123, 130;
   --circle-size: 80%;
   --blending: hard-light;
 }
@@ -222,53 +226,4 @@ body {
   font-weight: 600;
   line-height: 14px;
   letter-spacing: 0.015em;
-}
-
-.logo-text {
-  font-family: "Fjalla One", sans-serif;
-  font-size: 15px;
-  font-style: normal;
-  line-height: 23px;
-  letter-spacing: 0em;
-  color: #c0c0c0;
-}
-
-.logo-text {
-  font-family: "Fjalla One", sans-serif;
-  font-size: 15px;
-  font-style: normal;
-  line-height: 23px;
-  letter-spacing: 0em;
-  color: #c0c0c0;
-}
-
-.dragging {
-  user-select: none; /* Standard */
-  -webkit-user-select: none; /* Safari */
-  cursor: grabbing;
-}
-
-.custom-scroll::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-.custom-scroll::-webkit-scrollbar-thumb {
-  background: var(--color-border-tertiary);
-  border-radius: 10px;
-}
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-secondary);
-}
-
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.glass {
-  backdrop-filter: blur(9.6px);
-  -webkit-backdrop-filter: blur(9.6px);
 }

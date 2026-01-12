@@ -61,8 +61,8 @@
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color1), 0.8) 0,
-        rgba(var(--color1), 0) 50%
+        rgba(var(--grad-fg), 0.8) 0,
+        rgba(var(--grad-fg), 0) 50%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -78,8 +78,8 @@
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color2), 0.8) 0,
-        rgba(var(--color2), 0) 50%
+        rgba(var( --grad-deep), 0.8) 0,
+        rgba(var( --grad-deep), 0) 50%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -95,8 +95,8 @@
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color3), 0.8) 0,
-        rgba(var(--color3), 0) 50%
+        rgba(var( --grad-soft), 0.8) 0,
+        rgba(var( --grad-soft), 0) 50%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -112,8 +112,8 @@
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color4), 0.8) 0,
-        rgba(var(--color4), 0) 50%
+        rgba(var(--grad-accent), 0.8) 0,
+        rgba(var(--grad-accent), 0) 50%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -129,8 +129,8 @@
     position: absolute;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color5), 0.8) 0,
-        rgba(var(--color5), 0) 50%
+        rgba(var(--grad-mid), 0.8) 0,
+        rgba(var(--grad-mid), 0) 50%
       )
       no-repeat;
     mix-blend-mode: var(--blending);
@@ -147,8 +147,8 @@
     z-index: 10;
     background: radial-gradient(
         circle at center,
-        rgba(var(--color-interactive), 0.8) 0,
-        rgba(var(--color-interactive), 0) 50%
+        rgba(var(--grad-interactive), 0.8) 0,
+        rgba(var(--grad-interactive), 0) 50%
       )
       no-repeat;
     mix-blend-mode: var(--blending);

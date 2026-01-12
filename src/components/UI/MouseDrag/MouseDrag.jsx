@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import styles from "./DragStyle.module.css";
 
 export default function useDragScroll() {
   const ref = useRef(null);
@@ -12,19 +13,19 @@ export default function useDragScroll() {
       // only left click
       if (e.button !== 0) return;
       isDown = true;
-      el.classList.add("dragging");
+      el.classList.add(styles["drag-active"]);
       startX = e.pageX - el.getBoundingClientRect().left;
       startScrollLeft = el.scrollLeft;
     };
 
     const onLeave = () => {
       isDown = false;
-      el.classList.remove("dragging");
+      el.classList.remove(styles["drag-active"]);
     };
 
     const onUp = () => {
       isDown = false;
-      el.classList.remove("dragging");
+      el.classList.remove(styles["drag-active"]);
     };
 
     const onMove = (e) => {
